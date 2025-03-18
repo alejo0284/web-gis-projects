@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    /* Make iframe responsive */
+    .map-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;  /* Limits excessive stretching on large screens */
+      height: 80vh;  /* Takes up most of the screen height */
+      margin: auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      .map-container {
+        height: 60vh; /* Reduce height on smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Interactive Map Viewer</h2>
+
+  <div class="map-container">
+    <iframe src="https://www.nwmsuinternetgis.org/spring2024/S557369/Lab%20Exercise%209%20-%20Map%20Services%20and%20Web%20Applications/Index.html" allowfullscreen></iframe>
+  </div>
+
+</body>
+</html>
+
+

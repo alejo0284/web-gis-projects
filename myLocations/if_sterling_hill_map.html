@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<title>Sterling Hill Mine Map Overview</title>
+<meta charset="utf-8">
+<link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+<script src="https://js.arcgis.com/4.27/"></script>
+<style>
+html, body, #viewDiv {
+  height: 97.5%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
+</head>
+<body>
+<div id="viewDiv"></div>
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/TileLayer",
+  "esri/layers/MapImageLayer"
+], function(Map, MapView, TileLayer, MapImageLayer) {
+  var baselayer = new TileLayer({
+    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+  });
+
+  var map = new Map({
+    basemap: { baseLayers: [baselayer] }
+  });
+
+  var layer = new MapImageLayer({
+    url: "https://gis.nwmissouri.edu/server/rest/services/ManuelAcosta/Possible_Locations/MapServer",
+    opacity: 0.6
+  });
+  map.add(layer);
+
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-74.6044444, 41.0833333], // Longitude first, then latitude for Sterling Hill
+    zoom: 12
+  });
+});
+</script>
+</body>
+</html>

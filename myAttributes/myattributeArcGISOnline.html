@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Manuel Acosta´s Attribute table</title>
+
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            overflow: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .navTable {
+            width: 100%;
+            background-color: #f8f8f8;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .navTable td {
+            padding: 5px;
+        }
+
+        .breadcrumbs {
+            font-size: 14px;
+            color: #333;
+        }
+
+        #help {
+            font-size: 14px;
+            color: #333;
+            text-align: right;
+        }
+
+        #viewDiv {
+            position: absolute;
+            top: 100px; /* Adjusted to accommodate the navigation table */
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: auto;
+        }
+
+        @media (max-width: 600px) {
+            .navTable {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .navTable td {
+                padding: 5px 0;
+            }
+
+            #viewDiv {
+                top: 150px; /* Further adjustment for mobile devices */
+            }
+
+            .esri-popup__main-container {
+                max-width: 90% !important;
+                max-height: 50vh !important;
+                overflow: auto !important;
+            }
+
+            .esri-popup__header {
+                font-size: 14px !important;
+            }
+
+            .esri-popup__content {
+                font-size: 12px !important;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.29/"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer"
+      ], function(Map, MapView, FeatureLayer) {
+        const map = new Map({
+          basemap: "streets-navigation-vector"
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-88.4768832, 40.4718882],
+          zoom: 2.5
+        });
+
+        const featureLayer = new FeatureLayer({
+          url: "https://gis.nwmissouri.edu/server/rest/services/ManuelAcosta/US2015POP/MapServer",
+          opacity: 0.6,
+          outFields: ["NAME", "POPULATION", "POP2010", "HISPANIC"],
+          popupTemplate: {
+            title: "US 2015 Population",
+            content: [{
+              type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "NAME",
+                  label: "County"
+                },
+                {
+                  fieldName: "POPULATION",
+                  label: "POP2015"
+                },
+                {
+                  fieldName: "POP2010",
+                  label: "POP2010"
+                },
+                {
+                  fieldName: "HISPANIC",
+                  label: "Hispanic Population"
+                }
+              ]
+            }]
+          }
+        });
+
+        map.add(featureLayer);
+
+        view.popup.autoResizeEnabled = true;
+        view.popup.dockEnabled = true;
+        view.popup.dockOptions = {
+          position: "bottom-right",
+          breakpoint: false
+        };
+
+        view.when(() => {
+          view.popup.viewModel.on("trigger-action", (event) => {
+            if (event.action.id === "find-brewery") {
+              const attributes = view.popup.selectedFeature.attributes;
+              const info = attributes.website;
+              if (info) {
+                window.open(info.trim());
+              }
+            }
+          });
+        });
+      });
+    </script>
+</head>
+<body>
+  <table class="navTable">
+    <tbody>
+      <tr valign="top">
+        <td class="breadcrumbs">ArcGIS API for JavaScript: ManuelAcosta/UScnty -- Click on any US county to bring up its attributes.</td>
+        <td id="help">Built using the <a target="sdkView" href="//developers.arcgis.com/javascript">ArcGIS API for JavaScript</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="viewDiv"></div>
+</body>
+</html>
