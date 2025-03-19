@@ -1,49 +1,60 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Sterling Hill Mine Map Overview</title>
-<meta charset="utf-8">
-<link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
-<script src="https://js.arcgis.com/4.27/"></script>
-<style>
-html, body, #viewDiv {
-  height: 97.5%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-</style>
+  <title>Sterling Hill Mine Overview</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <link rel="shortcut icon" href="https://www.esri.com/favicon.ico" />
+  <link rel="icon" href="https://www.esri.com/favicon.ico" />
+  <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+  <script src="https://js.arcgis.com/4.27/"></script>
+  <style>
+    html, body, #viewDiv {
+      height: 97.5%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
-<div id="viewDiv"></div>
-<script>
-require([
-  "esri/Map",
-  "esri/views/MapView",
-  "esri/layers/TileLayer",
-  "esri/layers/MapImageLayer"
-], function(Map, MapView, TileLayer, MapImageLayer) {
-  var baselayer = new TileLayer({
-    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-  });
+  <h2>Sterling Hill Mine Overview</h2>
+  <div id="viewDiv"></div>
 
-  var map = new Map({
-    basemap: { baseLayers: [baselayer] }
-  });
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/Graphic",
+      "esri/layers/GraphicsLayer"
+    ], function(Map, MapView, Graphic, GraphicsLayer) {
 
-  var layer = new MapImageLayer({
-    url: "https://gis.nwmissouri.edu/server/rest/services/ManuelAcosta/Possible_Locations/MapServer",
-    opacity: 0.6
-  });
-  map.add(layer);
+      var map = new Map({ basemap: "satellite" });
 
-  var view = new MapView({
-    container: "viewDiv",
-    map: map,
-    center: [-74.6044444, 41.0833333], // Longitude first, then latitude for Sterling Hill
-    zoom: 12
-  });
-});
-</script>
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-74.6044444, 41.0833333], // Sterling Mine coordinates 
+        zoom: 12
+      });
+
+      var markerSymbol = {
+        type: "simple-marker",
+        style: "x",
+        color: "red",
+        size: "16px",
+        outline: { color: "white", width: 2 }
+      };
+
+      var point = { type: "point", longitude: -74.6044444, latitude: 41.0833333 }; // Longitude first, then latitude for Sterling Hill
+
+      var pointGraphic = new Graphic({ geometry: point, symbol: markerSymbol });
+
+      var graphicsLayer = new GraphicsLayer();
+      graphicsLayer.add(pointGraphic);
+      map.add(graphicsLayer);
+
+    });
+  </script>
 </body>
 </html>
