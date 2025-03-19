@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Gasado Mine Overview</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-  <link rel="shortcut icon" href="https://www.esri.com/favicon.ico" />
-  <link rel="icon" href="https://www.esri.com/favicon.ico" />
-  <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Interactive Map Viewer</title>
+  
+  <!-- ArcGIS API for JavaScript -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.27/"></script>
+
   <style>
     html, body, #viewDiv {
-      height: 97.5%;
+      height: 100%;
       width: 100%;
       margin: 0;
       padding: 0;
@@ -18,59 +19,74 @@
   </style>
 </head>
 <body>
-  <h2>Gasado Mine Overview</h2>
+
+  <h2>Interactive Map Viewer</h2>
   <div id="viewDiv"></div>
 
   <script>
     require([
       "esri/Map",
       "esri/views/MapView",
+      "esri/layers/TileLayer",
       "esri/Graphic",
       "esri/layers/GraphicsLayer"
-    ], function(Map, MapView, Graphic, GraphicsLayer) {
+    ], function(Map, MapView, TileLayer, Graphic, GraphicsLayer) {
 
-      var map = new Map({
-        basemap: "satellite" // Uses the default Esri satellite basemap
+      // Basemap Layer
+      var baselayer = new TileLayer({
+        url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
       });
 
+      var map = new Map({
+        basemap: { baseLayers: [baselayer] }
+      });
+
+      // View
       var view = new MapView({
         container: "viewDiv",
         map: map,
-        center: [126.0461111, 34.4666667], // Gasado Mine coordinates
+        center: [126.0461111, 34.4666667], // Longitude, Latitude
         zoom: 12
       });
 
-      // Define a red "X" marker
+      // Graphics Layer for X marker
+      var graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+      // X Marker Symbol
       var markerSymbol = {
-        type: "simple-marker",
-        style: "x",  // X shape
+        type: "text", // Text symbol type
         color: "red",
-        size: "16px",
-        outline: {
-          color: "white",
-          width: 2
+        text: "✖",  // X symbol
+        font: {
+          size: 18,
+          weight: "bold"
         }
       };
 
-      // Define the location for the marker
-      var point = {
-        type: "point",
-        longitude: 126.0461111,
-        latitude: 34.4666667
-      };
+      // Location Markers
+      var locations = [
+        { lon: 126.0461111, lat: 34.4666667 }, // Example: Gasado Mine
+        // Add more locations as needed
+      ];
 
-      // Create a graphic for the marker
-      var pointGraphic = new Graphic({
-        geometry: point,
-        symbol: markerSymbol
+      locations.forEach(function(loc) {
+        var point = {
+          type: "point",
+          longitude: loc.lon,
+          latitude: loc.lat
+        };
+
+        var graphic = new Graphic({
+          geometry: point,
+          symbol: markerSymbol
+        });
+
+        graphicsLayer.add(graphic);
       });
-
-      // Add the marker to a graphics layer
-      var graphicsLayer = new GraphicsLayer();
-      graphicsLayer.add(pointGraphic);
-      map.add(graphicsLayer);
 
     });
   </script>
+
 </body>
 </html>
