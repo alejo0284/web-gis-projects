@@ -2,52 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map Viewer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #f4f4f4;
-    }
-
-    /* Make iframe responsive */
-    .map-container {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;  /* Limits excessive stretching on large screens */
-      height: 80vh;  /* Takes up most of the screen height */
-      margin: auto;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Mobile Optimization */
-    @media (max-width: 768px) {
-      .map-container {
-        height: 60vh; /* Reduce height on smaller screens */
-      }
-    }
-  </style>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Mine Locations Story Map</title>
 </head>
 <body>
 
-  <h2>Interactive Map Viewer</h2>
+  <h2 align="center">Mine Locations Story Map</h2>
 
-  <div class="map-container">
-    <iframe src="https://alejo0284.github.io/web-gis-projects/myLocations/index.html" allowfullscreen></iframe>
-  </div>
+  <!-- Navigation Table -->
+  <table align="center">
+    <tr>
+      <td width="150">
+        <a href="if_gasado.html" target="pic_map">
+          <img src="https://iondrive.com.au/wp-content/uploads/2023/03/gasado-map.jpeg" height="80">
+        </a>
+        <br>Gasado Mine
+      </td>
+      <td width="150">
+        <a href="if_la_independencia.html" target="pic_map">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Flag_of_Mexico.svg/320px-Flag_of_Mexico.svg.png" height="80">
+        </a>
+        <br>La Independencia
+      </td>
+      <td width="150">
+        <a href="if_mugwump.html" target="pic_map">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Gold_Nugget_18.2grams.jpg" height="80">
+        </a>
+        <br>Mugwump Mine
+      </td>
+      <td width="150">
+        <a href="if_sterling_hill.html" target="pic_map">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Sterling_Hill_Mine.jpg" height="80">
+        </a>
+        <br>Sterling Hill
+      </td>
+    </tr>
+  </table>
+
+  <!-- Default Display (Shows Gasado First) -->
+  <iframe name="pic_map" width="100%" height="560px" src="if_gasado.html"></iframe>
 
 </body>
 </html>
-
-
