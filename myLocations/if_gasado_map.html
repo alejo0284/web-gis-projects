@@ -1,92 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Interactive Map Viewer</title>
-  
-  <!-- ArcGIS API for JavaScript -->
-  <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css">
-  <script src="https://js.arcgis.com/4.27/"></script>
-
-  <style>
-    html, body, #viewDiv {
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+<title>ArcGIS API for JavaScript: Gasado Mine Overview</title>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="//www.esri.com/favicon.ico" />
+<link rel="icon" href="//www.esri.com/favicon.ico" />
+<link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+<script src="https://js.arcgis.com/4.27/"></script>
+<style>
+html, body, #viewDiv {
+  height: 97.5%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
 </head>
 <body>
+<table class="navTable" style="width:100%">
+<tbody>
+<tr valign="top">
+<td class="breadcrumbs">ArcGIS JavaScript API: Gasado Mine</td>
+<td align="right" id="help">Built using the
+<a target="_blank" href="https://developers.arcgis.com/javascript/">ArcGIS API for JavaScript</a></td>
+</tr>
+</tbody>
+</table>
+<div id="viewDiv"></div>
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/TileLayer",
+  "esri/layers/MapImageLayer"
+], function(Map, MapView, TileLayer, MapImageLayer) {
 
-  <h2>Interactive Map Viewer</h2>
-  <div id="viewDiv"></div>
+  var baselayer = new TileLayer({
+    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+  });
 
-  <script>
-    require([
-      "esri/Map",
-      "esri/views/MapView",
-      "esri/layers/TileLayer",
-      "esri/Graphic",
-      "esri/layers/GraphicsLayer"
-    ], function(Map, MapView, TileLayer, Graphic, GraphicsLayer) {
+  var map = new Map({
+    basemap: { baseLayers: [baselayer] }
+  });
 
-      // Basemap Layer
-      var baselayer = new TileLayer({
-        url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-      });
+  // ✅ Replace this with your ArcGIS Online service URL
+  var layer = new MapImageLayer({
+    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer",
+    opacity: 0.6
+  });
+  map.add(layer);
 
-      var map = new Map({
-        basemap: { baseLayers: [baselayer] }
-      });
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [126.0461111, 34.4666667], // Gasado Mine
+    zoom: 12
+  });
 
-      // View
-      var view = new MapView({
-        container: "viewDiv",
-        map: map,
-        center: [126.0461111, 34.4666667], // Longitude, Latitude
-        zoom: 12
-      });
-
-      // Graphics Layer for X marker
-      var graphicsLayer = new GraphicsLayer();
-      map.add(graphicsLayer);
-
-      // X Marker Symbol
-      var markerSymbol = {
-        type: "text", // Text symbol type
-        color: "red",
-        text: "✖",  // X symbol
-        font: {
-          size: 18,
-          weight: "bold"
-        }
-      };
-
-      // Location Markers
-      var locations = [
-        { lon: 126.0461111, lat: 34.4666667 }, // Example: Gasado Mine
-        // Add more locations as needed
-      ];
-
-      locations.forEach(function(loc) {
-        var point = {
-          type: "point",
-          longitude: loc.lon,
-          latitude: loc.lat
-        };
-
-        var graphic = new Graphic({
-          geometry: point,
-          symbol: markerSymbol
-        });
-
-        graphicsLayer.add(graphic);
-      });
-
-    });
-  </script>
-
+});
+</script>
 </body>
 </html>
