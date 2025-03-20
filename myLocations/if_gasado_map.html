@@ -33,8 +33,8 @@ require([
   "esri/Map",
   "esri/views/MapView",
   "esri/layers/TileLayer",
-  "esri/layers/MapImageLayer"
-], function(Map, MapView, TileLayer, MapImageLayer) {
+  "esri/layers/FeatureLayer"
+], function(Map, MapView, TileLayer, FeatureLayer) {
 
   var baselayer = new TileLayer({
     url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
@@ -44,13 +44,6 @@ require([
     basemap: { baseLayers: [baselayer] }
   });
 
-  // ✅ Replace this with your ArcGIS Online service URL
-  var layer = new MapImageLayer({
-    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
-    opacity: 0.6
-  });
-  map.add(layer);
-
   var view = new MapView({
     container: "viewDiv",
     map: map,
@@ -58,6 +51,17 @@ require([
     zoom: 12
   });
 
+  // ✅ Use FeatureLayer instead of MapImageLayer
+  var mineLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
+    outFields: ["*"], // Load all attributes
+    popupTemplate: {
+      title: "{Mine_Name}",
+      content: "This mine is located at {Latitude}, {Longitude}."
+    }
+  });
+
+  map.add(mineLayer);
 });
 </script>
 </body>
