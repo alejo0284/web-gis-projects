@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,11 +13,12 @@
       background-color: #f4f4f4;
     }
 
+    /* Make iframe responsive */
     .map-container {
       position: relative;
       width: 100%;
-      max-width: 1200px;
-      height: 80vh;
+      max-width: 1200px;  /* Limits excessive stretching on large screens */
+      height: 80vh;  /* Takes up most of the screen height */
       margin: auto;
       border: 2px solid #ddd;
       border-radius: 10px;
@@ -30,16 +31,11 @@
       border: none;
     }
 
+    /* Mobile Optimization */
     @media (max-width: 768px) {
       .map-container {
-        height: 60vh;
+        height: 60vh; /* Reduce height on smaller screens */
       }
-    }
-
-    select {
-      font-size: 16px;
-      padding: 5px;
-      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -47,26 +43,11 @@
 
   <h2>Interactive Map Viewer</h2>
 
-  <label for="location-select">Choose a location:</label>
-  <select id="location-select" onchange="changeMap()">
-    <option value="if_gasado.html">Gasado Mine</option>
-    <option value="if_la_independencia.html">La Independencia</option>
-    <option value="if_mugwump.html">Mugwump</option>
-    <option value="if_sterling_hill.html">Sterling Hill</option>
-  </select>
-
   <div class="map-container">
-    <iframe id="map-frame" src="https://alejo0284.github.io/web-gis-projects/myLocations/if_gasado.html" allowfullscreen></iframe>
+    <iframe src="https://alejo0284.github.io/web-gis-projects/myLocations/index.html" allowfullscreen></iframe>
   </div>
-
-  <script>
-    function changeMap() {
-      var select = document.getElementById("location-select");
-      var iframe = document.getElementById("map-frame");
-      var selectedMap = select.value;
-      iframe.src = "https://alejo0284.github.io/web-gis-projects/myLocations/" + selectedMap;
-    }
-  </script>
 
 </body>
 </html>
+
+
