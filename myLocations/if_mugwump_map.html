@@ -1,60 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <title>Mugwump Mine Overview</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-  <link rel="shortcut icon" href="https://www.esri.com/favicon.ico" />
-  <link rel="icon" href="https://www.esri.com/favicon.ico" />
-  <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
-  <script src="https://js.arcgis.com/4.27/"></script>
-  <style>
-    html, body, #viewDiv {
-      height: 97.5%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+<title>ArcGIS API for JavaScript: Mugwump Mine Overview</title>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+<link rel="shortcut icon" href="//www.esri.com/favicon.ico" />
+<link rel="icon" href="//www.esri.com/favicon.ico" />
+<link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+<script src="https://js.arcgis.com/4.27/"></script>
+<style>
+html, body, #viewDiv {
+  height: 97.5%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
 </head>
 <body>
-  <h2>Mugwump Mine Overview</h2>
-  <div id="viewDiv"></div>
+<table class="navTable" style="width:100%">
+<tbody>
+<tr valign="top">
+<td class="breadcrumbs">ArcGIS JavaScript API: Mugwump Mine</td>
+<td align="right" id="help">Built using the
+<a target="_blank" href="https://developers.arcgis.com/javascript/">ArcGIS API for JavaScript</a></td>
+</tr>
+</tbody>
+</table>
+<div id="viewDiv"></div>
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/TileLayer",
+  "esri/layers/MapImageLayer"
+], function(Map, MapView, TileLayer, MapImageLayer) {
+  var baselayer = new TileLayer({
+    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+  });
 
-  <script>
-    require([
-      "esri/Map",
-      "esri/views/MapView",
-      "esri/Graphic",
-      "esri/layers/GraphicsLayer"
-    ], function(Map, MapView, Graphic, GraphicsLayer) {
+  var map = new Map({
+    basemap: { baseLayers: [baselayer] }
+  });
 
-      var map = new Map({ basemap: "satellite" });
+  var layer = new MapImageLayer({
+    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer",
+    opacity: 0.6
+  });
+  map.add(layer);
 
-      var view = new MapView({
-        container: "viewDiv",
-        map: map,
-        center: [-120.8433333, 39.4697222], // Mugwump Mine coordinates
-        zoom: 12
-      });
-
-      var markerSymbol = {
-        type: "simple-marker",
-        style: "x",
-        color: "red",
-        size: "16px",
-        outline: { color: "white", width: 2 }
-      };
-
-      var point = { type: "point", longitude: -120.8433333, latitude: 39.4697222 }; // Updated coordinates for Mugwump
-
-      var pointGraphic = new Graphic({ geometry: point, symbol: markerSymbol });
-
-      var graphicsLayer = new GraphicsLayer();
-      graphicsLayer.add(pointGraphic);
-      map.add(graphicsLayer);
-
-    });
-  </script>
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-120.8433333, 39.4697222], // Updated coordinates for Mugwump
+    zoom: 12 // Adjusted zoom level for a clear overview
+  });
+});
+</script>
 </body>
 </html>
