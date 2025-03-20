@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>La Independencia Mine Map</title>
+<title>ArcGIS API for JavaScript: La Independencia Mine Overview</title>
 <meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+<link rel="shortcut icon" href="//www.esri.com/favicon.ico" />
+<link rel="icon" href="//www.esri.com/favicon.ico" />
 <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
 <script src="https://js.arcgis.com/4.27/"></script>
 <style>
@@ -16,38 +18,45 @@ html, body, #viewDiv {
 </style>
 </head>
 <body>
-
+<table class="navTable" style="width:100%">
+<tbody>
+<tr valign="top">
+<td class="breadcrumbs">ArcGIS JavaScript API: La Independencia Mine</td>
+<td align="right" id="help">Built using the
+<a target="_blank" href="https://developers.arcgis.com/javascript/">ArcGIS API for JavaScript</a></td>
+</tr>
+</tbody>
+</table>
 <div id="viewDiv"></div>
-
 <script>
 require([
   "esri/Map",
   "esri/views/MapView",
-  "esri/layers/FeatureLayer"
-], function(Map, MapView, FeatureLayer) {
+  "esri/layers/TileLayer",
+  "esri/layers/MapImageLayer"
+], function(Map, MapView, TileLayer, MapImageLayer) {
+  var baselayer = new TileLayer({
+    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+  });
 
-  var map = new Map({ basemap: "satellite" });
+  var map = new Map({
+    basemap: { baseLayers: [baselayer] }
+  });
+
+  var layer = new MapImageLayer({
+    url: "https://gis.nwmissouri.edu/server/rest/services/ManuelAcosta/Possible_Locations/MapServer",
+    opacity: 0.6
+  });
+  map.add(layer);
 
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [-75.7877778, 6.0858333], // La Independencia Mine coordinates
+    center: [-75.7877778, 6.0858333], // Longitude first, then latitude for La Independencia
     zoom: 12
   });
-
-  var mineLayer = new FeatureLayer({
-    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
-    outFields: ["*"],
-    popupTemplate: {
-      title: "{Mine_Name}",
-      content: "This mine is located at {Latitude}, {Longitude}."
-    }
-  });
-
-  map.add(mineLayer);
 });
 </script>
-
 </body>
 </html>
 
