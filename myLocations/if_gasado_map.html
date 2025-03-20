@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ArcGIS API for JavaScript: Gasado Mine Overview</title>
+<title>Gasado Mine Map</title>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
@@ -17,7 +17,6 @@ html, body, #viewDiv {
 </head>
 <body>
 
-<h3>Gasado Mine Map</h3>
 <div id="viewDiv"></div>
 
 <script>
@@ -27,12 +26,8 @@ require([
   "esri/layers/FeatureLayer"
 ], function(Map, MapView, FeatureLayer) {
 
-  // ✅ Create the map
-  var map = new Map({
-    basemap: "satellite" // Directly use the satellite basemap
-  });
+  var map = new Map({ basemap: "satellite" });
 
-  // ✅ Create the view
   var view = new MapView({
     container: "viewDiv",
     map: map,
@@ -40,7 +35,6 @@ require([
     zoom: 12
   });
 
-  // ✅ Load the Feature Layer correctly
   var mineLayer = new FeatureLayer({
     url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
     outFields: ["*"],
@@ -50,7 +44,6 @@ require([
     }
   });
 
-  // ✅ Add the layer to the map
   map.add(mineLayer);
 });
 </script>
