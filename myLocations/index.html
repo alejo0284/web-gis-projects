@@ -1,53 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map Viewer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #f4f4f4;
-    }
-
-    /* Make iframe responsive */
-    .map-container {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;  /* Limits excessive stretching on large screens */
-      height: 80vh;  /* Takes up most of the screen height */
-      margin: auto;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Mobile Optimization */
-    @media (max-width: 768px) {
-      .map-container {
-        height: 60vh; /* Reduce height on smaller screens */
-      }
-    }
-  </style>
+<title>Welcome to My Story Map</title>
+<meta name="description" content="Exploring potential underground mine locations for geological research.">
+<meta name="keywords" content="Geological Research, Underground Mines, 3D Geologic Model">
 </head>
 <body>
-
-  <h2>Interactive Map Viewer</h2>
-
-  <div class="map-container">
-    <iframe src="https://alejo0284.github.io/web-gis-projects/myLocations/index.html" allowfullscreen></iframe>
-  </div>
-
+<p align="center">Exploration of Underground Mines for Geologic Research</p>
+<table>
+<tr>
+    <td width="150"><a href="if_gasado.html" target="pic_map">
+    <img src="https://iondrive.com.au/wp-content/uploads/2023/03/GassadoNorth-2-1024x563.jpeg" height="80" alt="Gasado Mine"> <br>
+    Gasado <br>
+	Location: South Korea <br>
+    The deposit was discovered in 1989 by Ivanhoe geologist Doug Kirwin and his team after they found the remarkable Lighthouse Vein on the south coast </a>
+    </td>
+    <td width="130"><a href="if_la_independencia.html" target="pic_map">
+    <img src="https://wp-denariusmetals-2023.s3.ca-central-1.amazonaws.com/media/2024/02/Denarius-80-1024x683.jpg" height="80" alt="La Independencia Mine"> <br>
+    La Independencia <br>
+	Location: Colombia <br>
+    The Zancudo Project includes the historic producing Independencia Mine and has a rich history dating back over 250 years</a>
+    </td>
+    <td width="170"><a href="if_mugwump.html" target="pic_map">
+    <img src="https://www.researchgate.net/publication/339708012/figure/fig2/AS:865541556289538@1583372596606/a-Mother-Lode-Au-quartz-vein-system-hosted-near-Melones-Fault-Coulterville-CA-inset-at.png" height="80" alt="Mugwump Mine"> <br>
+    Mugwump <br>
+	Location: US (California) <br>
+    A former lode Au occurrence/mine located about 1.6 km (1.0 mile) W of Alleghany, on the S slope of Pliocene Ridge, W of Wet Ravine </a>
+    </td>
+    <td><a href="if_sterling_hill.html" target="pic_map">
+    <img src="https://www.themontclairgirl.com/wp-content/uploads/2021/11/Sterling-Hill-mining-museum-3-800x800.png" height="80" alt="Sterling Hill Mine"> <br>
+    Sterling Hill<br>
+	Location: US (New Jersey) <br>
+    The predominant minerals were finally identified to be rich in the element zinc, and in 1836 several small companies began mining, triggering quite a few land disputes. In 1897 the New Jersey Zinc Company consolidated the properties and began a major operation for the extraction of zinc</a>
+    </td>
+</tr>
+</table>
+<iframe name="pic_map" width="100%" height="560px" src="if_gasado.html"></iframe>
 </body>
 </html>
+
+
+
+
 
 
