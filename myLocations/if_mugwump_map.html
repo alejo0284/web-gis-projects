@@ -1,11 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<title>ArcGIS API for JavaScript: Mugwump Mine Overview</title>
+<title>Mugwump Mine Map</title>
 <meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-<link rel="shortcut icon" href="//www.esri.com/favicon.ico" />
-<link rel="icon" href="//www.esri.com/favicon.ico" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
 <script src="https://js.arcgis.com/4.27/"></script>
 <style>
@@ -18,44 +16,37 @@ html, body, #viewDiv {
 </style>
 </head>
 <body>
-<table class="navTable" style="width:100%">
-<tbody>
-<tr valign="top">
-<td class="breadcrumbs">ArcGIS JavaScript API: Mugwump Mine</td>
-<td align="right" id="help">Built using the
-<a target="_blank" href="https://developers.arcgis.com/javascript/">ArcGIS API for JavaScript</a></td>
-</tr>
-</tbody>
-</table>
+
 <div id="viewDiv"></div>
+
 <script>
 require([
   "esri/Map",
   "esri/views/MapView",
-  "esri/layers/TileLayer",
-  "esri/layers/MapImageLayer"
-], function(Map, MapView, TileLayer, MapImageLayer) {
-  var baselayer = new TileLayer({
-    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-  });
+  "esri/layers/FeatureLayer"
+], function(Map, MapView, FeatureLayer) {
 
-  var map = new Map({
-    basemap: { baseLayers: [baselayer] }
-  });
-
-  var layer = new MapImageLayer({
-    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
-    opacity: 0.6
-  });
-  map.add(layer);
+  var map = new Map({ basemap: "satellite" });
 
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [-120.8433333, 39.4697222], // Updated coordinates for Mugwump
-    zoom: 12 // Adjusted zoom level for a clear overview
+    center: [-120.8433333, 39.4697222], // Mugwump Mine coordinates
+    zoom: 14
   });
+
+  var mineLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
+    outFields: ["*"],
+    popupTemplate: {
+      title: "{Mine_Name}",
+      content: "This mine is located at {Latitude}, {Longitude}."
+    }
+  });
+
+  map.add(mineLayer);
 });
 </script>
+
 </body>
 </html>

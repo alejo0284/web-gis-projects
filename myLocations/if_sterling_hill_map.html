@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Sterling Hill Mine Map Overview</title>
+<title>Sterling Hill Mine Map</title>
 <meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
 <script src="https://js.arcgis.com/4.27/"></script>
 <style>
@@ -15,35 +16,37 @@ html, body, #viewDiv {
 </style>
 </head>
 <body>
+
 <div id="viewDiv"></div>
+
 <script>
 require([
   "esri/Map",
   "esri/views/MapView",
-  "esri/layers/TileLayer",
-  "esri/layers/MapImageLayer"
-], function(Map, MapView, TileLayer, MapImageLayer) {
-  var baselayer = new TileLayer({
-    url: "http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-  });
+  "esri/layers/FeatureLayer"
+], function(Map, MapView, FeatureLayer) {
 
-  var map = new Map({
-    basemap: { baseLayers: [baselayer] }
-  });
-
-  var layer = new MapImageLayer({
-    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
-    opacity: 0.6
-  });
-  map.add(layer);
+  var map = new Map({ basemap: "satellite" });
 
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [-74.6044444, 41.0833333], // Longitude first, then latitude for Sterling Hill
-    zoom: 12
+    center: [-74.6044444, 41.0833333], // Sterling Hill Mine coordinates
+    zoom: 14
   });
+
+  var mineLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/MyLocations_Mines/FeatureServer/0",
+    outFields: ["*"],
+    popupTemplate: {
+      title: "{Mine_Name}",
+      content: "This mine is located at {Latitude}, {Longitude}."
+    }
+  });
+
+  map.add(mineLayer);
 });
 </script>
+
 </body>
 </html>
