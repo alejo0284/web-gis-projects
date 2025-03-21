@@ -1,42 +1,84 @@
-<script>
-  require([
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/layers/FeatureLayer",
-    "esri/widgets/Legend",
-    "esri/widgets/Expand"
-  ], (Map, MapView, FeatureLayer, Legend, Expand) => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>US Population Map</title>
 
-    const layer = new FeatureLayer({
-      url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/US_POP_Web_Map_MIL1/FeatureServer"
-    });
+  <!-- ArcGIS API for JavaScript -->
+  <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+  <script src="https://js.arcgis.com/4.27/"></script>
 
-    const map = new Map({
-      basemap: "streets-night-vector",
-      layers: [layer]
-    });
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+    .custom-legend .esri-widget--panel {
+      max-width: 300px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .custom-legend .esri-widget--panel {
+        max-width: 250px;
+        max-height: 200px;
+      }
+    }
+  </style>
 
-    const view = new MapView({
-      container: "viewDiv",
-      map: map,
-      center: [-100, 40], // Centered near Kansas, roughly in the middle of the US
-      zoom: 3 // Zoom level should be low to capture all states
-    });
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/Legend",
+      "esri/widgets/Expand"
+    ], (Map, MapView, FeatureLayer, Legend, Expand) => {
 
-    view.when(() => {
-      const legend = new Legend({
-        view: view,
-        layerInfos: [{ layer: layer, title: "US Population in 2015" }]
+      // Use FeatureLayer instead of MapImageLayer
+      const layer = new FeatureLayer({
+        url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/US_POP_Web_Map_MIL1/FeatureServer"
       });
 
-      const legendExpand = new Expand({
-        view: view,
-        content: legend,
-        expanded: false,
-        expandTooltip: "Show Legend"
+      // Create Map
+      const map = new Map({
+        basemap: "streets-night-vector",
+        layers: [layer]
       });
 
-      view.ui.add(legendExpand, "top-right");
+      // Create View
+      const view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-98.5, 39.8], // Adjust center if needed
+        zoom: 4
+      });
+
+      view.when(() => {
+        // Create the Legend widget
+        const legend = new Legend({
+          view: view,
+          layerInfos: [{ layer: layer, title: "US Population in 2015" }]
+        });
+
+        // Use Expand widget for better mobile experience
+        const legendExpand = new Expand({
+          view: view,
+          content: legend,
+          expanded: false,
+          expandTooltip: "Show Legend"
+        });
+
+        view.ui.add(legendExpand, "top-right");
+      });
     });
-  });
-</script>
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
