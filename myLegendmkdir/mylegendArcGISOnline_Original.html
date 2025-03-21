@@ -39,38 +39,33 @@
       "esri/widgets/Expand"
     ], (Map, MapView, FeatureLayer, Legend, Expand) => {
 
+      // Use FeatureLayer instead of MapImageLayer
       const layer = new FeatureLayer({
         url: "https://services.arcgis.com/h4jNYexE41HKnu98/arcgis/rest/services/US_POP_Web_Map_MIL1/FeatureServer"
       });
 
+      // Create Map
       const map = new Map({
         basemap: "streets-night-vector",
         layers: [layer]
       });
 
+      // Create View
       const view = new MapView({
         container: "viewDiv",
         map: map,
-<<<<<<< Updated upstream
         center: [-98.5, 39.8], // Adjust center if needed
-        zoom: 2.5
-=======
-        extent: {
-          xmin: -2500000, // Covers Hawaii
-          ymin: -1800000, // Covers Alaska
-          xmax: 2500000, 
-          ymax: 1800000, 
-          spatialReference: { wkid: 102100 } // Web Mercator
-        }
->>>>>>> Stashed changes
+        zoom: 4
       });
 
       view.when(() => {
+        // Create the Legend widget
         const legend = new Legend({
           view: view,
           layerInfos: [{ layer: layer, title: "US Population in 2015" }]
         });
 
+        // Use Expand widget for better mobile experience
         const legendExpand = new Expand({
           view: view,
           content: legend,
