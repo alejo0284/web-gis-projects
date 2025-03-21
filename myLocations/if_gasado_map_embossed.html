@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Gasado Mine Map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="https://js.arcgis.com/4.29/"></script>
+    <style>
+        html, body, #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/GroupLayer",
+            "esri/portal/PortalItem"
+        ], function(Map, MapView, GroupLayer, PortalItem) {
+
+            // Create the base map (Imagery Hybrid)
+            var map = new Map({
+                basemap: "hybrid"
+            });
+
+            // Load the Group Layer from ArcGIS Online
+            var groupLayer = new GroupLayer({
+                portalItem: new PortalItem({
+                    id: "30bcc468414149f390ce25dc36170330" // Your Group Layer ID
+                }),
+                visible: true
+            });
+
+            // Add the Group Layer to the map
+            map.add(groupLayer);
+
+            // Create the view
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [126.0, 34.0], // Adjust for each mine's location
+                zoom: 12
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id="viewDiv"></div>
+</body>
+</html>
