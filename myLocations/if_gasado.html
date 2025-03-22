@@ -1,12 +1,46 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<title>Gasado Mine Overview</title>
-<meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
-<meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gasado Mine Overview</title>
+  <meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
+  <meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    iframe {
+      flex: 1;
+      min-width: 300px;
+      height: 500px;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-<iframe name="pic" width="30%" height="530px" src="if_gasado_pic.html"></iframe>
-<iframe name="map" width="68%" height="530px" src="if_gasado_map.html"></iframe>
+
+<div class="content">
+  <iframe name="pic" src="if_gasado_pic.html"></iframe>
+  <iframe name="map" src="if_gasado_map.html"></iframe>
+</div>
+
 </body>
 </html>

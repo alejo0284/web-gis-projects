@@ -1,43 +1,99 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<title>Welcome to My Story Map</title>
-<meta name="description" content="Exploring potential underground mine locations for geological research.">
-<meta name="keywords" content="Geological Research, Underground Mines, 3D Geologic Model">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exploration of Underground Mines</title>
+  <meta name="description" content="Exploring potential underground mine locations for geological research.">
+  <meta name="keywords" content="Geological Research, Underground Mines, 3D Geologic Model">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .mine-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .mine-item {
+      text-align: center;
+      width: 45%;
+      max-width: 180px;
+    }
+
+    .mine-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .mine-item a {
+      text-decoration: none;
+      color: black;
+      display: block;
+      margin-top: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .mine-item {
+        width: 90%;
+      }
+
+      iframe {
+        height: 450px; /* Adjust height for mobile */
+      }
+    }
+  </style>
 </head>
 <body>
-<p align="center">Exploration of Underground Mines for Geologic Research</p>
-<table>
-<tr>
-    <td width="150"><a href="if_gasado.html" target="pic_map">
-    <img src="https://iondrive.com.au/wp-content/uploads/2023/03/GassadoNorth-2-1024x563.jpeg" height="80" alt="Gasado Mine"> <br>
-    Gasado <br>
-	Location: South Korea <br>
-    The deposit was discovered in 1989 by Ivanhoe geologist Doug Kirwin and his team after they found the remarkable Lighthouse Vein on the south coast </a>
-    </td>
-    <td width="130"><a href="if_la_independencia.html" target="pic_map">
-    <img src="https://wp-denariusmetals-2023.s3.ca-central-1.amazonaws.com/media/2024/02/Denarius-80-1024x683.jpg" height="80" alt="La Independencia Mine"> <br>
-    La Independencia <br>
-	Location: Colombia <br>
-    The Zancudo Project includes the historic producing Independencia Mine and has a rich history dating back over 250 years</a>
-    </td>
-    <td width="170"><a href="if_mugwump.html" target="pic_map">
-    <img src="https://www.researchgate.net/publication/339708012/figure/fig2/AS:865541556289538@1583372596606/a-Mother-Lode-Au-quartz-vein-system-hosted-near-Melones-Fault-Coulterville-CA-inset-at.png" height="80" alt="Mugwump Mine"> <br>
-    Mugwump <br>
-	Location: US (California) <br>
-    A former lode Au occurrence/mine located about 1.6 km (1.0 mile) W of Alleghany, on the S slope of Pliocene Ridge, W of Wet Ravine </a>
-    </td>
-    <td><a href="if_sterling_hill.html" target="pic_map">
-    <img src="https://www.themontclairgirl.com/wp-content/uploads/2021/11/Sterling-Hill-mining-museum-3-800x800.png" height="80" alt="Sterling Hill Mine"> <br>
-    Sterling Hill<br>
-	Location: US (New Jersey) <br>
-    Rich in zinc, mining began in 1836. The New Jersey Zinc Company took over in 1897.</a>
-    </td>
-</tr>
-</table>
+
+<h1>Exploration of Underground Mines</h1>
+
+<div class="mine-container">
+  <div class="mine-item">
+    <a href="if_gasado.html" target="pic_map">
+      <img src="https://iondrive.com.au/wp-content/uploads/2023/03/GassadoNorth-2-1024x563.jpeg" alt="Gasado Mine">
+      <p>Gasado - South Korea</p>
+    </a>
+  </div>
+  <div class="mine-item">
+    <a href="if_la_independencia.html" target="pic_map">
+      <img src="https://wp-denariusmetals-2023.s3.ca-central-1.amazonaws.com/media/2024/02/Denarius-80-1024x683.jpg" alt="La Independencia Mine">
+      <p>La Independencia - Colombia</p>
+    </a>
+  </div>
+  <div class="mine-item">
+    <a href="if_mugwump.html" target="pic_map">
+      <img src="https://goldexplorers.com/mugwump-mine/#jp-carousel-2899" alt="Mugwump Mine">
+      <p>Mugwump - California, US</p>
+    </a>
+  </div>
+  <div class="mine-item">
+    <a href="if_sterling_hill.html" target="pic_map">
+      <img src="https://www.themontclairgirl.com/wp-content/uploads/2021/11/Sterling-Hill-mining-museum-3-800x800.png" alt="Sterling Hill Mine">
+      <p>Sterling Hill - New Jersey, US</p>
+    </a>
+  </div>
+</div>
+
+<!-- Map and Picture Display -->
 <iframe name="pic_map" width="100%" height="560px" src="if_gasado.html"></iframe>
+
 </body>
 </html>
+
 
 
 
