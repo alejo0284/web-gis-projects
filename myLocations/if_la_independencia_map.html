@@ -23,10 +23,22 @@
       left: 0;
     }
 
-    /* Mobile Optimization */
+    /* Desktop Styles */
+    @media (min-width: 769px) {
+      #viewDiv {
+        height: 100%; /* Full height for desktop */
+      }
+    }
+
+    /* Mobile Styles */
     @media (max-width: 768px) {
       #viewDiv {
-        height: 100vh !important; /* Make the map fill the iframe */
+        height: 100vh; /* Full viewport height for mobile */
+      }
+
+      /* Optional: Adjust zoom level for mobile */
+      .esri-ui {
+        font-size: 14px; /* Smaller UI elements for mobile */
       }
     }
   </style>
@@ -68,8 +80,6 @@ require([
 
   // Ensure map resizes correctly when iframe size changes
   view.when(() => {
-    view.container.style.height = "100%";
-    view.container.style.width = "100%";
     view.resize();
   });
 
@@ -82,6 +92,17 @@ require([
   window.addEventListener("scroll", () => {
     view.resize();
   });
+
+  // Fix for Chrome: Resize map when the iframe is fully visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        view.resize();
+      }
+    });
+  });
+
+  observer.observe(document.getElementById("viewDiv"));
 
 });
 </script>
