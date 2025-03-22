@@ -88,6 +88,22 @@ require([
     view.resize();
   });
 
+  // Fix for Chrome: Resize map when the user scrolls
+  window.addEventListener("scroll", () => {
+    view.resize();
+  });
+
+  // Fix for Chrome: Resize map when the iframe is fully visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        view.resize();
+      }
+    });
+  });
+
+  observer.observe(document.getElementById("viewDiv"));
+
 });
 </script>
 
