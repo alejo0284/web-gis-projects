@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mugwump Mine Map</title>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-<link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
-<script src="https://js.arcgis.com/4.27/"></script>
-<style>
-html, body, #viewDiv {
-  height: 97.5%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-</style>
+  <title>Mugwump Mine Map</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://js.arcgis.com/4.27/esri/css/main.css" rel="stylesheet">
+  <script src="https://js.arcgis.com/4.27/"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Prevent scrollbars */
+    }
+
+    #viewDiv {
+      width: 100%;
+      height: 100%;
+      position: absolute; /* Ensure it takes full space */
+      top: 0;
+      left: 0;
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 769px) {
+      #viewDiv {
+        height: 100%; /* Full height for desktop */
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      #viewDiv {
+        height: 100vh; /* Full viewport height for mobile */
+      }
+
+      /* Optional: Adjust zoom level for mobile */
+      .esri-ui {
+        font-size: 14px; /* Smaller UI elements for mobile */
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -45,6 +73,33 @@ require([
   });
 
   map.add(mineLayer);
+
+  // Ensure map resizes correctly when iframe size changes
+  view.when(() => {
+    view.resize();
+  });
+
+  // Handle window resize events
+  window.addEventListener("resize", () => {
+    view.resize();
+  });
+
+  // Fix for Chrome: Resize map when the user scrolls
+  window.addEventListener("scroll", () => {
+    view.resize();
+  });
+
+  // Fix for Chrome: Resize map when the iframe is fully visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        view.resize();
+      }
+    });
+  });
+
+  observer.observe(document.getElementById("viewDiv"));
+
 });
 </script>
 
