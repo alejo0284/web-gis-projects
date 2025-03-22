@@ -19,10 +19,10 @@
       height: 530px; /* Default for desktops */
     }
 
-    /* Force map to expand on mobile */
-    @media screen and (max-width: 768px) {
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
       #viewDiv {
-        height: 500px !important; /* ✅ Forces a larger map height */
+        height: 60vh !important; /* ✅ Map height = 60% of viewport height */
       }
     }
   </style>
