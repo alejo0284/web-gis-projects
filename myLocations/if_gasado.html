@@ -1,61 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gasado Mine Overview</title>
   <meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
   <meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
     }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* Default layout: Side-by-side */
-    .iframe-box {
-      height: 530px;
-    }
-
-    #picFrame {
+    /* Desktop layout: Side by side */
+    iframe[name="pic"] {
       width: 30%;
+      height: 530px;
+      float: left;
     }
 
-    #mapFrame {
-      width: 70%;
+    iframe[name="map"] {
+      width: 68%;
+      height: 530px;
+      float: left;
     }
 
-    /* Mobile: Stack picture on top and make map bigger */
-    @media screen and (max-width: 768px) { 
-      .container {
-        flex-direction: column;
-      }
-
-      .iframe-box {
+    /* Mobile: Stack the picture and map */
+    @media screen and (max-width: 768px) {
+      iframe[name="pic"],
+      iframe[name="map"] {
         width: 100%;
-        height: auto;
-        min-height: 320px;
+        float: none;
       }
 
-      #mapFrame {
-        height: 500px !important; /* ✅ Map is larger on mobile */
+      iframe[name="map"] {
+        height: 500px !important; /* ✅ Bigger map on mobile */
       }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <iframe class="iframe-box" id="picFrame" name="pic" src="if_gasado_pic.html"></iframe>
-  <iframe class="iframe-box" id="mapFrame" name="map" src="if_gasado_map.html"></iframe>
-</div>
+<iframe name="pic" src="if_gasado_pic.html"></iframe>
+<iframe name="map" src="if_gasado_map.html"></iframe>
 
 </body>
 </html>
