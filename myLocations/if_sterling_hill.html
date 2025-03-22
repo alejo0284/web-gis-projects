@@ -1,12 +1,45 @@
 <!doctype html>
 <html>
 <head>
-<title>Sterling Hill Mine Overview</title>
-<meta name="description" content="Detailed exploration of Sterling Hill Mine, New Jersey.">
-<meta name="keywords" content="Sterling Hill, Mine, New Jersey, Geological Research, 3D Modeling">
+  <title>Sterling Hill Mine Overview</title>
+  <meta name="description" content="Detailed exploration of Sterling Hill Mine, New Jersey.">
+  <meta name="keywords" content="Sterling Hill, Mine, New Jersey, Geological Research, 3D Modeling">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Default desktop layout: Picture (30%) on the left, Map (68%) on the right */
+    iframe[name="pic"] {
+      width: 30%;
+      height: 530px;
+      float: left;
+    }
+
+    iframe[name="map"] {
+      width: 68%;
+      height: 530px;
+      float: left;
+    }
+
+    /* Mobile: Stack the picture and map to take full width */
+    @media screen and (max-width: 768px) {
+      iframe[name="pic"],
+      iframe[name="map"] {
+        width: 100%;
+        float: none;
+      }
+
+      iframe[name="map"] {
+        height: 60vh !important; /* Make the map bigger on mobile */
+      }
+    }
+  </style>
 </head>
 <body>
-<iframe name="pic" width="30%" height="530px" src="if_sterling_hill_pic.html"></iframe>
-<iframe name="map" width="68%" height="530px" src="if_sterling_hill_map.html"></iframe>
+  <iframe name="pic" src="if_sterling_hill_pic.html"></iframe>
+  <iframe name="map" src="if_sterling_hill_map.html"></iframe>
 </body>
 </html>
