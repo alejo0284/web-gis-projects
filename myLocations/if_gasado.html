@@ -19,25 +19,33 @@
       justify-content: center;
     }
 
+    /* Default layout: Side-by-side */
     .iframe-box {
-      width: 50%;
       height: 530px;
     }
 
-    /* Force larger map height for mobile screens */
+    #picFrame {
+      width: 30%;
+    }
+
+    #mapFrame {
+      width: 70%;
+    }
+
+    /* Mobile: Stack picture on top and make map bigger */
     @media screen and (max-width: 768px) { 
       .container {
         flex-direction: column;
       }
-      
+
       .iframe-box {
         width: 100%;
         height: auto;
-        min-height: 350px; /* Prevents tiny iframes */
+        min-height: 320px;
       }
 
       #mapFrame {
-        height: 600px !important; /* ✅ Ensures the map iframe takes more space */
+        height: 500px !important; /* ✅ Map is larger on mobile */
       }
     }
   </style>
