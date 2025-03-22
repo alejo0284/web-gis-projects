@@ -1,45 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gasado Mine Overview</title>
-  <meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
-  <meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-    }
+<title>Gasado Mine Overview</title>
+<meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
+<meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
 
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .iframe-box {
+    width: 50%;
+    height: 530px;
+  }
+
+  @media screen and (max-width: 768px) { 
+    /* Adjust for mobile screens */
+    .iframe-box {
       width: 100%;
+      height: 300px;
     }
-
-    iframe {
-      flex: 1;
-      min-width: 300px;
-      height: 500px;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        flex-direction: column;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-<div class="content">
-  <iframe name="pic" src="if_gasado_pic.html"></iframe>
-  <iframe name="map" src="if_gasado_map.html"></iframe>
+<div class="container">
+  <iframe class="iframe-box" name="pic" src="if_gasado_pic.html"></iframe>
+  <iframe class="iframe-box" name="map" src="if_gasado_map.html"></iframe>
 </div>
 
 </body>
