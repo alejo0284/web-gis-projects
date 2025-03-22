@@ -23,22 +23,10 @@
       left: 0;
     }
 
-    /* Desktop Styles */
-    @media (min-width: 769px) {
-      #viewDiv {
-        height: 100%; /* Full height for desktop */
-      }
-    }
-
-    /* Mobile Styles */
+    /* Mobile Optimization */
     @media (max-width: 768px) {
       #viewDiv {
-        height: 100vh; /* Full viewport height for mobile */
-      }
-
-      /* Optional: Adjust zoom level for mobile */
-      .esri-ui {
-        font-size: 14px; /* Smaller UI elements for mobile */
+        height: 100vh !important; /* Make the map fill the iframe */
       }
     }
   </style>
@@ -60,7 +48,11 @@ require([
     container: "viewDiv",
     map: map,
     center: [-75.7864641, 6.0861411], // La Independencia Mine coordinates
-    zoom: 11.5
+    zoom: 11.5,
+    constraints: {
+      minZoom: 5,
+      maxZoom: 16
+    }
   });
 
   var mineLayer = new FeatureLayer({
@@ -76,6 +68,8 @@ require([
 
   // Ensure map resizes correctly when iframe size changes
   view.when(() => {
+    view.container.style.height = "100%";
+    view.container.style.width = "100%";
     view.resize();
   });
 
@@ -88,17 +82,6 @@ require([
   window.addEventListener("scroll", () => {
     view.resize();
   });
-
-  // Fix for Chrome: Resize map when the iframe is fully visible
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        view.resize();
-      }
-    });
-  });
-
-  observer.observe(document.getElementById("viewDiv"));
 
 });
 </script>
