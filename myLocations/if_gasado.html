@@ -1,42 +1,52 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<title>Gasado Mine Overview</title>
-<meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
-<meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .iframe-box {
-    width: 50%;
-    height: 530px;
-  }
-
-  @media screen and (max-width: 768px) { 
-    /* Adjust for mobile screens */
-    .iframe-box {
-      width: 100%;
-      height: 300px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gasado Mine Overview</title>
+  <meta name="description" content="Detailed exploration of Gasado Mine, South Korea.">
+  <meta name="keywords" content="Gasado, Mine, South Korea, Geological Research, 3D Modeling">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
-  }
-</style>
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .iframe-box {
+      width: 50%;
+      height: 530px;
+    }
+
+    /* Force larger map height for mobile screens */
+    @media screen and (max-width: 768px) { 
+      .container {
+        flex-direction: column;
+      }
+      
+      .iframe-box {
+        width: 100%;
+        height: auto;
+        min-height: 350px; /* Prevents tiny iframes */
+      }
+
+      #mapFrame {
+        height: 600px !important; /* ✅ Ensures the map iframe takes more space */
+      }
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
-  <iframe class="iframe-box" name="pic" src="if_gasado_pic.html"></iframe>
-  <iframe class="iframe-box" name="map" src="if_gasado_map.html"></iframe>
+  <iframe class="iframe-box" id="picFrame" name="pic" src="if_gasado_pic.html"></iframe>
+  <iframe class="iframe-box" id="mapFrame" name="map" src="if_gasado_map.html"></iframe>
 </div>
 
 </body>
