@@ -16,13 +16,12 @@
 
     #viewDiv {
       width: 100%;
-      height: 530px; /* Default height for desktops */
+      height: 530px; /* Default for desktops */
     }
 
-    /* Adjust map height for mobile screens */
     @media screen and (max-width: 768px) {
       #viewDiv {
-        height: 300px;
+        height: 550px; /* Bigger map on mobile */
       }
     }
   </style>
@@ -46,8 +45,8 @@ require([
     center: [126.0461111, 34.4666667], // Gasado Mine coordinates
     zoom: 6,
     constraints: {
-      minZoom: 5, // Prevent excessive zooming out
-      maxZoom: 16  // Prevent excessive zooming in
+      minZoom: 5,
+      maxZoom: 16
     }
   });
 
